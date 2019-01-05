@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MongoDBNetCore.Services.MongoRepository;
 
 namespace MongoDBNetCore
 {
@@ -25,6 +26,9 @@ namespace MongoDBNetCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string mongoConnectionString = this.Configuration.GetConnectionString("MongoConnectionString");
+            services.AddTransient(s => new RockSongsRepository(mongoConnectionString, "Songs", "RockSongs"));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
