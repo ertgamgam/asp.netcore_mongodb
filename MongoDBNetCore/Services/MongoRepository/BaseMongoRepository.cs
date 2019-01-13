@@ -6,7 +6,7 @@ using MongoDBNetCore.Model;
 
 namespace MongoDBNetCore.Services.MongoRepository
 {
-    public class BaseMongoRepository<TModel>
+    public abstract class BaseMongoRepository<TModel>
         where TModel : MongoBaseModel
     {
         private readonly IMongoCollection<TModel> mongoCollection;
